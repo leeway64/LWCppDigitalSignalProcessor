@@ -1,6 +1,6 @@
-// 1/10/2021
+// 1/11/2021
 // This class allows the user to define an input to a system and a system
-// impulse function (x and h, respectively). This class also allows the user to
+// impulse function (x and h, respectively). This class then allows the user to
 // perform the discrete Fourier transform (DFT) on x and h.
 
 #include "DSP.h"
@@ -39,7 +39,17 @@ double * DSP::getH(){
     return h;
 }
 
-// Returns the DFT of the input vector
+// Returns the DFT of x
+complex<double> * DSP::DFTX(){
+    return DFT(x);
+}
+
+// Returns the DFT of h
+complex<double> * DSP::DFTH(){
+    return DFT(h);
+}
+
+// Returns the DFT of the input vector. Output is an array of size LENGTH.
 complex<double> * DSP::DFT(double input[]){
     static complex<double> result[LENGTH];
     for (int i = 0; i < LENGTH; i++){
@@ -48,13 +58,6 @@ complex<double> * DSP::DFT(double input[]){
     return result;
 }
 
-complex<double> * DSP::DFTX(){
-    return DFT(x);
-}
-
-complex<double> * DSP::DFTH(){
-    return DFT(h);
-}
 
 // Calculate each k value one by one. Helper function for the DFT function.
 complex<double> DSP::k_value(double input[], double n_vector[], int k){
