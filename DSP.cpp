@@ -1,4 +1,3 @@
-// 1/11/2021
 // This class allows the user to define an input to a system and a system
 // impulse function (x and h, respectively). This class then allows the user to
 // perform the discrete Fourier transform (DFT) on x and h.
@@ -9,9 +8,9 @@
 using namespace std;
 
 
-#define LENGTH 6
-double pi = 2 * acos(0.0);
-complex<double> j(0,1);
+#define LENGTH 5
+const double pi = 2 * acos(0.0);
+const complex<double> j(0,1);
 
 
 DSP::DSP(double x1[], double h1[]){
