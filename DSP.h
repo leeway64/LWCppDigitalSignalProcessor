@@ -9,7 +9,6 @@
 #include <vector>
 using namespace std;
 
-
 class DSP{
     private:
         vector<complex<double>> x;  // System input signal
@@ -33,6 +32,6 @@ class DSP{
         complex<double> kValue(vector<complex<double>> input, vector<complex<double>> nVector, int k);
 
         // Helper function for the DFT function.
-        vector<complex<double>> nVector();
+        vector<double> angularFrequency(int inputSize);
 };
 #endif // DSP_H

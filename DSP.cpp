@@ -39,28 +39,29 @@ vector<complex<double>> DSP::getH() const{
 
 // Returns the DFT of the input vector. Output is a vector input.size() long.
 vector<complex<double>> DSP::DFT(vector<complex<double>> input){
-    static complex<double> result[LENGTH];
-    for (int i = 0; i < LENGTH; i++){
-        result[i] = kValue(input, n_vector(), i);
+    vector<complex<double>> result;
+    const int inputSize = input.size();
+    for (int i = 0; i < inputSize; i++){
+        result[i] = kValue(input, angularFrequency(inputSize), i);
     }
     return result;
 }
 
 // Calculate each k value one by one. Helper function for the DFT function.
-complex<double> DSP::kValue(vector<complex<double>> input, vector<complex<double>> nVector, int k){
+complex<double> DSP::kValue(vector<complex<double>> input, vector<complex<double>> angularFrequency, int k){
     complex<double> result(0, 0);
-    for (int i = 0; i < LENGTH; i++){
-        result += polar(1.0 * input[i], -1.0 * nVector[i] * k);
+    for (int i = 0; i < input.size(); i++){
+        result += polar(1.0 * input[i], -1.0 * angularFrequency[i] * k);
     }
     return result;
 }
 
 // Helper function for the DFT function.
-vector<complex<double>> DSP::nVector(){
-    double x = 2 * pi / LENGTH;
-    static double result[LENGTH];
-    for (int i = 0; i < LENGTH; i++){
-        result[i] = x * i;
+vector<double> DSP::angularFrequency(int inputSize){
+    const double x = 2 * pi / inputSize;
+    vector<double> result;
+    for (int i = 0; i < inputSize; i++){
+        result.push_back(x * i);
     }
     return result;
 }
