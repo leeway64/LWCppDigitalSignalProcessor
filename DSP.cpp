@@ -8,67 +8,55 @@
 using namespace std;
 
 
-#define LENGTH 5
 const double pi = 2 * acos(0.0);
 const complex<double> j(0,1);
 
 
-DSP::DSP(double x1[], double h1[]){
-    setX(x1);
-    setH(h1);
+DSP::DSP(vector<complex<double>> x, vector<complex<double>> h){
+    setX(x);
+    setH(h);
 }
 
-void DSP::setX(double x1[]){
-    for (int i = 0; i < LENGTH; i++){
-        x[i] = x1[i];
+void DSP::setX(vector<complex<double>> x){
+    for (int i = 0; i < x.size(); i++){
+        this->x[i] = x[i];
     }
 }
 
-void DSP::setH(double h1[]){
-    for (int i = 0; i < LENGTH; i++){
-        h[i] = h1[i];
+void DSP::setH(vector<complex<double>> h){
+    for (int i = 0; i < h.size(); i++){
+        this->h[i] = h[i];
     }
 }
 
-double * DSP::getX(){
+vector<complex<double>> DSP::getX() const{
     return x;
 }
 
-double * DSP::getH(){
+vector<complex<double>> DSP::getH() const{
     return h;
 }
 
-// Returns the DFT of x
-complex<double> * DSP::DFTX(){
-    return DFT(x);
-}
-
-// Returns the DFT of h
-complex<double> * DSP::DFTH(){
-    return DFT(h);
-}
-
-// Returns the DFT of the input vector. Output is an array of size LENGTH.
-complex<double> * DSP::DFT(double input[]){
+// Returns the DFT of the input vector. Output is a vector input.size() long.
+vector<complex<double>> DSP::DFT(vector<complex<double>> input){
     static complex<double> result[LENGTH];
     for (int i = 0; i < LENGTH; i++){
-        result[i] = k_value(input, n_vector(), i);
+        result[i] = kValue(input, n_vector(), i);
     }
     return result;
 }
 
-
 // Calculate each k value one by one. Helper function for the DFT function.
-complex<double> DSP::k_value(double input[], double n_vector[], int k){
+complex<double> DSP::kValue(vector<complex<double>> input, vector<complex<double>> nVector, int k){
     complex<double> result(0, 0);
     for (int i = 0; i < LENGTH; i++){
-        result += polar(1.0*input[i], -1.0*n_vector[i]*k);
+        result += polar(1.0 * input[i], -1.0 * nVector[i] * k);
     }
     return result;
 }
 
 // Helper function for the DFT function.
-double * DSP::n_vector(){
+vector<complex<double>> DSP::nVector(){
     double x = 2 * pi / LENGTH;
     static double result[LENGTH];
     for (int i = 0; i < LENGTH; i++){

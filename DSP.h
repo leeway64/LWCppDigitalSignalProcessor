@@ -22,23 +22,17 @@ class DSP{
 
         void setH(vector<complex<double>> h);
 
-        vector<complex<double>> getX();
+        vector<complex<double>> getX() const;
 
-        vector<complex<double>> getH();
-
-        // Returns the DFT of x
-        vector<complex<double>> DFTX();
-
-        // Returns the DFT of h
-        vector<complex<double>> DFTH();
+        vector<complex<double>> getH() const;
 
         // Returns the DFT of the input vector. Output is an array of size LENGTH.
-        vector<complex<double>> DFT(double input[]);
+        static vector<complex<double>> DFT(vector<complex<double>> input);
 
         // Calculate each k value one by one. Helper function for the DFT function.
-        complex<double> k_value(double input[], double n_vector[], int k);
+        complex<double> kValue(vector<complex<double>> input, vector<complex<double>> nVector, int k);
 
         // Helper function for the DFT function.
-        complex<double> n_vector();
+        vector<complex<double>> nVector();
 };
 #endif // DSP_H
