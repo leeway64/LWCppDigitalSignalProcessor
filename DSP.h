@@ -10,15 +10,12 @@
 using namespace std;
 
 class DSP{
-    private:        
-        // Calculate each k value one by one. Helper function for the DFT function.
-        static complex<double> kValue(vector<complex<double>> input, vector<double> angularFrequency, int k);
-
-        // Helper function for the DFT function.
-        static vector<double> angularFrequency(int inputSize);
     public:
         vector<complex<double>> x;  // System input signal
         vector<complex<double>> h;  // System impulse function
+        
+        // Default constructor
+        DSP();
 
         DSP(vector<complex<double>> x, vector<complex<double>> h);
 
@@ -33,5 +30,11 @@ class DSP{
 
         // Returns the DFT of the input vector
         static vector<complex<double>> DFT(vector<complex<double>> input);
+    private:
+        // Calculate each k value one by one. Helper function for the DFT function.
+        static complex<double> kValue(vector<complex<double>> input, vector<double> angularFrequency, int k);
+
+        // Helper function for the DFT function.
+        static vector<double> angularFrequency(int inputSize);
 };
 #endif // DSP_H
