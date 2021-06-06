@@ -21,6 +21,18 @@ DSP::DSP(vector<complex<double>> x, vector<complex<double>> h){
     this->h = h;
 }
 
+// Copy constructor
+DSP::DSP(const DSP& other) {
+    *this = other;
+}
+
+// Assignment operator
+DSP& DSP::operator=(const DSP& other) {
+    this->x = other.x;
+    this->h = other.h;
+    return *this;
+}
+
 // Returns the DFT of the input vector. Output is a vector input.size() long.
 vector<complex<double>> DSP::DFT(vector<complex<double>> input) {
     vector<complex<double>> result;
