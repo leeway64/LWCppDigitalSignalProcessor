@@ -13,28 +13,8 @@ const complex<double> j(0,1);
 
 
 DSP::DSP(vector<complex<double>> x, vector<complex<double>> h){
-    setX(x);
-    setH(h);
-}
-
-void DSP::setX(vector<complex<double>> x){
-    for (int i = 0; i < x.size(); i++){
-        this->x[i] = x[i];
-    }
-}
-
-void DSP::setH(vector<complex<double>> h){
-    for (int i = 0; i < h.size(); i++){
-        this->h[i] = h[i];
-    }
-}
-
-vector<complex<double>> DSP::getX() const{
-    return x;
-}
-
-vector<complex<double>> DSP::getH() const{
-    return h;
+    this->x = x;
+    this->h = h;
 }
 
 // Helper function for the DFT function.
