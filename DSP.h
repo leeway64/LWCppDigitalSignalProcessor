@@ -13,6 +13,12 @@ class DSP{
     private:
         vector<complex<double>> x;  // System input signal
         vector<complex<double>> h;  // System impulse function
+        
+        // Calculate each k value one by one. Helper function for the DFT function.
+        static complex<double> kValue(vector<complex<double>> input, vector<double> angularFrequency, int k);
+
+        // Helper function for the DFT function.
+        static vector<double> angularFrequency(int inputSize);
 
     public:
         DSP(vector<complex<double>> x, vector<complex<double>> h);
@@ -25,13 +31,7 @@ class DSP{
 
         vector<complex<double>> getH() const;
 
-        // Returns the DFT of the input vector. Output is an array of size LENGTH.
+        // Returns the DFT of the input vector
         static vector<complex<double>> DFT(vector<complex<double>> input);
-
-        // Calculate each k value one by one. Helper function for the DFT function.
-        complex<double> kValue(vector<complex<double>> input, vector<complex<double>> nVector, int k);
-
-        // Helper function for the DFT function.
-        vector<double> angularFrequency(int inputSize);
 };
 #endif // DSP_H
