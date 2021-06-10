@@ -28,13 +28,22 @@ class DSP{
         // initialized DSP object.
         DSP& operator=(const DSP& other);
 
+        friend bool operator==(const DSP& left, const DSP& right) {
+            return (left.x == right.x) && (left.h == right.h);
+        }
+
+        // Overload for not equal to operator
+        friend bool operator!=(const DSP& left, const DSP& right) {
+            return (left.x != right.x) || (left.h != right.h);
+        }
+
         // Returns the DFT of the input vector
         static vector<complex<double>> DFT(vector<complex<double>> input);
     private:
         // Calculate each k value one by one. Helper function for the DFT function.
-        static complex<double> kValue(vector<complex<double>> input, vector<double> angularFrequency, int k);
+        static inline complex<double> kValue(vector<complex<double>> input, vector<double> angularFrequency, int k);
 
         // Helper function for the DFT function.
-        static vector<double> angularFrequency(int inputSize);
+        static inline vector<double> angularFrequency(int inputSize);
 };
 #endif // DSP_H

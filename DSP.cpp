@@ -12,14 +12,9 @@ const double pi = 2 * acos(0.0);
 const complex<double> j(0,1);
 
 // Default constructor
-DSP::DSP() {
+DSP::DSP() {}
 
-}
-
-DSP::DSP(vector<complex<double>> x, vector<complex<double>> h){
-    this->x = x;
-    this->h = h;
-}
+DSP::DSP(vector<complex<double>> x, vector<complex<double>> h): x(x), h(h) {}
 
 // Copy constructor
 DSP::DSP(const DSP& other) {
