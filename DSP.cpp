@@ -33,13 +33,13 @@ vector<complex<double>> DSP::DFT(vector<complex<double>> input) {
     vector<complex<double>> result;
     const int inputSize = input.size();
     for (int i = 0; i < inputSize; i++) {
-        result[i] = kValue(input, angularFrequency(inputSize), i);
+        result[i] = DFTElement(input, angularFrequency(inputSize), i);
     }
     return result;
 }
 
-// Calculate each k value one by one. Helper function for the DFT function.
-complex<double> DSP::kValue(vector<complex<double>> input, vector<double> angularFrequency, int k) {
+// Calculate each DFT value one by one.Helper function for the DFT function.
+complex<double> DSP::DFTElement(vector<complex<double>> input, vector<double> angularFrequency, int k) {
     complex<double> result(0, 0);
     int inputLength = input.size();
     for (int i = 0; i < inputLength; i++) {
