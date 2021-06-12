@@ -1,0 +1,9 @@
+# Visual Studio stuff
+.vs/
+.vscode/
+*.user
+
+# Python stuff
+.env*/
+__pycache__/
+*.pyc
