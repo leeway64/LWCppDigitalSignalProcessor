@@ -64,5 +64,10 @@ TEST_CASE("Testing DFT function", "[DFT]") {
 	SECTION("One element in x and h") {
 		DSP1.x.push_back(v1[1]);
 		DSP1.h.push_back(v1[1]);
+		REQUIRE(DSP::DFT(DSP1.x)[0] == v1[1]);
+		REQUIRE(DSP::DFT(DSP1.x).size() == 1);
+
+		REQUIRE(DSP::DFT(DSP1.h)[0] == v1[1]);
+		REQUIRE(DSP::DFT(DSP1.h).size() == 1);
 	}
 }

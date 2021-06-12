@@ -14,7 +14,7 @@ class DSP{
         vector<complex<double>> x;  // System input signal
         vector<complex<double>> h;  // System impulse function
         
-        // Default constructor
+        // Default constructor. Leaves x and h as empty vectors.
         DSP();
 
         /**

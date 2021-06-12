@@ -11,12 +11,10 @@ using namespace std;
 const double pi = 2 * acos(0.0);
 const complex<double> j(0,1);
 
-// Default constructor
 DSP::DSP() {}
 
 DSP::DSP(vector<complex<double>> x, vector<complex<double>> h): x(x), h(h) {}
 
-// Copy constructor
 DSP::DSP(const DSP& other) {
     *this = other;
 }
@@ -33,7 +31,7 @@ vector<complex<double>> DSP::DFT(vector<complex<double>> input) {
     vector<complex<double>> result;
     const int inputSize = input.size();
     for (int i = 0; i < inputSize; i++) {
-        result[i] = DFTElement(input, angularFrequency(inputSize), i);
+        result.push_back(DFTElement(input, angularFrequency(inputSize), i));
     }
     return result;
 }
