@@ -1,4 +1,3 @@
-// 1/11/2021
 // This class allows the user to define an input to a system and a system
 // impulse function (x and h, respectively). This class then allows the user to
 // perform the discrete Fourier transform (DFT) on x and h.
@@ -9,71 +8,52 @@
 using namespace std;
 
 
-#define LENGTH 6
-double pi = 2 * acos(0.0);
-complex<double> j(0,1);
+const double pi = 2 * acos(0.0);
+const complex<double> j(0,1);
 
+// Default constructor
+DSP::DSP() {}
 
-DSP::DSP(double x1[], double h1[]){
-    setX(x1);
-    setH(h1);
+DSP::DSP(vector<complex<double>> x, vector<complex<double>> h): x(x), h(h) {}
+
+// Copy constructor
+DSP::DSP(const DSP& other) {
+    *this = other;
 }
 
-void DSP::setX(double x1[]){
-    for (int i = 0; i < LENGTH; i++){
-        x[i] = x1[i];
-    }
+// Assignment operator
+DSP& DSP::operator=(const DSP& other) {
+    this->x = other.x;
+    this->h = other.h;
+    return *this;
 }
 
-void DSP::setH(double h1[]){
-    for (int i = 0; i < LENGTH; i++){
-        h[i] = h1[i];
-    }
-}
-
-double * DSP::getX(){
-    return x;
-}
-
-double * DSP::getH(){
-    return h;
-}
-
-// Returns the DFT of x
-complex<double> * DSP::DFTX(){
-    return DFT(x);
-}
-
-// Returns the DFT of h
-complex<double> * DSP::DFTH(){
-    return DFT(h);
-}
-
-// Returns the DFT of the input vector. Output is an array of size LENGTH.
-complex<double> * DSP::DFT(double input[]){
-    static complex<double> result[LENGTH];
-    for (int i = 0; i < LENGTH; i++){
-        result[i] = k_value(input, n_vector(), i);
+// Returns the DFT of the input vector. Output is a vector input.size() long.
+vector<complex<double>> DSP::DFT(vector<complex<double>> input) {
+    vector<complex<double>> result;
+    const int inputSize = input.size();
+    for (int i = 0; i < inputSize; i++) {
+        result[i] = DFTElement(input, angularFrequency(inputSize), i);
     }
     return result;
 }
 
-
-// Calculate each k value one by one. Helper function for the DFT function.
-complex<double> DSP::k_value(double input[], double n_vector[], int k){
+// Calculate each DFT value one by one.Helper function for the DFT function.
+complex<double> DSP::DFTElement(vector<complex<double>> input, vector<double> angularFrequency, int k) {
     complex<double> result(0, 0);
-    for (int i = 0; i < LENGTH; i++){
-        result += polar(1.0*input[i], -1.0*n_vector[i]*k);
+    int inputLength = input.size();
+    for (int i = 0; i < inputLength; i++) {
+        result += polar(1.0 * abs(input[i]), (-1.0 * angularFrequency[i] * k) + arg(input[i]));
     }
     return result;
 }
 
 // Helper function for the DFT function.
-double * DSP::n_vector(){
-    double x = 2 * pi / LENGTH;
-    static double result[LENGTH];
-    for (int i = 0; i < LENGTH; i++){
-        result[i] = x * i;
+vector<double> DSP::angularFrequency(int inputSize) {
+    const double x = 2 * pi / inputSize;
+    vector<double> result;
+    for (int i = 0; i < inputSize; i++) {
+        result.push_back(x * i);
     }
     return result;
 }
