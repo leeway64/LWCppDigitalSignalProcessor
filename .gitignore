@@ -1,7 +1,10 @@
+# .gitignore file
+  
 # Visual Studio stuff
 .vs/
 .vscode/
 *.user
+Debug/
 
 # Python stuff
 .env*/
