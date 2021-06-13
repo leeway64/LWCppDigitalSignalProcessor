@@ -45,7 +45,7 @@ class DSP{
         /**
         Overload for equal to operator.
         @param left is the first DSP object to be compared.
-        @param right is teh second DSP object to be compared.
+        @param right is the second DSP object to be compared.
         @return true if the xs and hs for left and right are equal.
         */
         friend bool operator==(const DSP& left, const DSP& right) {

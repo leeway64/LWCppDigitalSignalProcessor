@@ -6,6 +6,17 @@
 
 using namespace std;
 
+vector<complex<double>> vectorWithSingleValue(int size, int value) {
+	vector<complex<double>> result;
+	for (int i = size; i > 0; --i) {
+		result.push_back(value);
+	}
+	return result;
+}
+
+void verifyVector() {
+}
+
 TEST_CASE("Testing constructors", "[Default ctor, construction from vectors, copy ctor, operator=]") {
 	vector<complex<double>> v1 = { 1,2,3,4 };
 	vector<complex<double>> v2 = { 5,6,7,8 };
@@ -44,14 +55,16 @@ TEST_CASE("Overloads for equal to/not equal to operators", "[Overloads]") {
 	vector<complex<double>> v1 = { 1,2,3,4 };
 	vector<complex<double>> v2 = { 5,6,7,8 };
 	vector<complex<double>> v3 = { 100, 50505, 1010 };
+
 	DSP DSP1(v1, v2);
 	DSP DSP2(v1, v2);
 	DSP DSP3(v3, v1);
+
 	REQUIRE(DSP1 == DSP2);
 	REQUIRE(DSP3 != DSP1);
 }
 
-TEST_CASE("Testing DFT function", "[DFT]") {
+TEST_CASE("Basic testing of DFT function", "[DFT]") {
 	vector<complex<double>> v1 = { 1,2,3,4 };
 	vector<complex<double>> v2 = { 5,6,7,8 };
 	DSP DSP1;
@@ -70,4 +83,12 @@ TEST_CASE("Testing DFT function", "[DFT]") {
 		REQUIRE(DSP::DFT(DSP1.h)[0] == v1[1]);
 		REQUIRE(DSP::DFT(DSP1.h).size() == 1);
 	}
+
+	SECTION("Constant values in x and h") {
+		DSP1.x = vectorWithSingleValue(4, 99);
+		DSP1.h = vectorWithSingleValue(10, 125);
+		
+
+	}
+
 }
