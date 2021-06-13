@@ -11,8 +11,8 @@ using namespace std;
 
 class DSP{
     public:
-        vector<complex<double>> x;  // System input signal
-        vector<complex<double>> h;  // System impulse function
+        vector<double> x;  // System input signal
+        vector<double> h;  // System impulse function
         
         // Default constructor. Leaves x and h as empty vectors.
         DSP();
@@ -22,7 +22,7 @@ class DSP{
         @param x is the system input signal that member variable x should be set to
         @param h is the system impulse function that member variable h should be set to
         */
-        DSP(vector<complex<double>> x, vector<complex<double>> h);
+        DSP(vector<double> x, vector<double> h);
 
         /**
         Copy constructor. Initializes a previously uninitialized DSP object with a previously
@@ -68,7 +68,7 @@ class DSP{
         @return A standard vector of the DFT of the input vector. The DFT of input will have the same
         length as input.
         */
-        static vector<complex<double>> DFT(vector<complex<double>> input);
+        static vector<complex<double>> DFT(vector<double> input);
     private:
         /**
         Calculate each DFT value one by one. Helper function for the DFT function.
@@ -78,7 +78,7 @@ class DSP{
         @param k is the index of the DFT element to calculate.
         @return
         */
-        static inline complex<double> DFTElement(vector<complex<double>> input, vector<double> angularFrequency, int k);
+        static inline complex<double> DFTElement(vector<double> input, vector<double> angularFrequency, int k);
 
         /**
         Calculates each angular frequency divided by the index of the DFT element. Helper function

@@ -13,7 +13,7 @@ const complex<double> j(0,1);
 
 DSP::DSP() {}
 
-DSP::DSP(vector<complex<double>> x, vector<complex<double>> h): x(x), h(h) {}
+DSP::DSP(vector<double> x, vector<double> h): x(x), h(h) {}
 
 DSP::DSP(const DSP& other) {
     *this = other;
@@ -27,7 +27,7 @@ DSP& DSP::operator=(const DSP& other) {
 }
 
 // Returns the DFT of the input vector. Output is a vector input.size() long.
-vector<complex<double>> DSP::DFT(vector<complex<double>> input) {
+vector<complex<double>> DSP::DFT(vector<double> input) {
     vector<complex<double>> result;
     const int inputSize = input.size();
     for (int i = 0; i < inputSize; i++) {
@@ -37,7 +37,7 @@ vector<complex<double>> DSP::DFT(vector<complex<double>> input) {
 }
 
 // Calculate each DFT value one by one.Helper function for the DFT function.
-complex<double> DSP::DFTElement(vector<complex<double>> input, vector<double> angularFrequency, int k) {
+complex<double> DSP::DFTElement(vector<double> input, vector<double> angularFrequency, int k) {
     complex<double> result(0, 0);
     int inputLength = input.size();
     for (int i = 0; i < inputLength; i++) {
