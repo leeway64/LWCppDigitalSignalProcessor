@@ -62,6 +62,15 @@ class DSP{
             return (left.x != right.x) || (left.h != right.h);
         }
 
+        /*
+        Connects 2 system impulse functions in parallel
+        @param other is the DSP that provides the other impulse function that the impulse function
+        of this DSP will be in parallel with
+        @return A new DSP, with an h of the sum of the impulse functions of this and other.
+        The x of the new DSP is the x of this DSP.
+        */
+        DSP& operator||(const DSP& other);
+
         /**
         Returns the DFT of the input vector.
         @param input is the standard vector to find the DFT of.

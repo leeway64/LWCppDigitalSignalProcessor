@@ -26,6 +26,27 @@ DSP& DSP::operator=(const DSP& other) {
     return *this;
 }
 
+// Place 2 system impulse functions in parallel with each other
+DSP& DSP::operator||(const DSP& other) {
+    static DSP DSPResult;
+    vector<double> largest = this->h;
+    vector<double> smallest = other.h;
+
+    if (other.h.size() > this->h.size()) {
+        largest = other.h;
+        smallest = this->h;
+    }
+
+    for (auto n = 0; n < smallest.size(); ++n) {
+        largest[n] = smallest[n] + largest[n];
+    }
+
+    DSPResult.h = largest;
+    DSPResult.x = this->x;
+
+    return DSPResult;
+}
+
 // Returns the DFT of the input vector. Output is a vector input.size() long.
 vector<complex<double>> DSP::DFT(vector<double> input) {
     vector<complex<double>> result;

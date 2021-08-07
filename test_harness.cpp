@@ -64,6 +64,26 @@ TEST_CASE("Overloads for equal to/not equal to operators", "[Overloads]") {
 	REQUIRE(DSP3 != DSP1);
 }
 
+TEST_CASE("2 systems in parallel", "[Parallel]") {
+	vector<double> v1 = { 1,2,3,4 };
+	vector<double> v2 = { 5,6,7,8 };
+	vector<double> v3 = { 100, 50505, 1010 };
+
+	vector<double> v4 = {10, 12, 14, 16};
+	vector<double> v5 = {105, 50511, 1017, 8};
+	DSP DSP1(v1, v2);
+	DSP DSP2(v1, v2);
+	DSP DSP3(v3, v3);
+
+	DSP DSP4 = DSP1 || DSP2;
+	REQUIRE(DSP4.x == v1);
+	REQUIRE(DSP4.h == v4);
+
+	DSP DSP5 = DSP3 || DSP1;
+	REQUIRE(DSP5.x == v3);
+	REQUIRE(DSP5.h == v5);
+}
+
 TEST_CASE("Basic testing of DFT function", "[DFT]") {
 	vector<double> v1 = { 1,2,3,4 };
 	vector<double> v2 = { 5,6,7,8 };
@@ -97,11 +117,16 @@ TEST_CASE("Basic testing of DFT function", "[DFT]") {
 		DSP1.x = vectorWithSingleValue(size1, value1);
 		DSP1.h = vectorWithSingleValue(size2, value2);
 		
-		REQUIRE(DSP::DFT(DSP1.x) == v1);
-		REQUIRE(DSP::DFT(DSP1.h) == v2);
-
+		REQUIRE(DSP::DFT(DSP1.x).size() == v1.size());
+		for (int index = 0; index < v1.size(); index++) {
+			REQUIRE(Approx(real(DSP::DFT(DSP1.x)[index])).margin(1e-12) == real(v1[index]));
+		}
+		
+		REQUIRE(DSP::DFT(DSP1.h).size() == v2.size());
+		for (int index = 0; index < v2.size(); index++) {
+			REQUIRE(Approx(real(DSP::DFT(DSP1.h)[index])).margin(1e-12) == real(v2[index]));
+		}
 	}
-
 }
 
 TEST_CASE("Further DFT testing", "[DFT]") {
