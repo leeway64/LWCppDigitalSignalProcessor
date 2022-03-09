@@ -2,7 +2,7 @@
 // impulse function (x and h, respectively). This class then allows the user to
 // perform the discrete Fourier transform (DFT) on x and h.
 
-#include "DSP.h"
+#include "DSP.hpp"
 #include <complex>
 #include <iostream>
 using namespace std;

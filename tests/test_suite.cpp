@@ -1,8 +1,9 @@
 #include <vector>
-#include <iostream>
 #include <complex>
-#include "catch.hpp"
-#include "DSP.h"
+
+#include <Catch2/catch.hpp>
+
+#include "../src/DSP.hpp"
 
 using namespace std;
 

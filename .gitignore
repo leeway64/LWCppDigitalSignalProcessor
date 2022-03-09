@@ -1,12 +1,5 @@
-# .gitignore file
-  
-# Visual Studio stuff
-.vs/
-.vscode/
-*.user
-Debug/
+# CLion project-specific settings
+.idea/
 
-# Python stuff
-.env*/
-__pycache__/
-*.pyc
+# CLion's default CMake build folder
+cmake-build-debug/
