@@ -3,17 +3,13 @@
 // perform the discrete Fourier transform (DFT) on x and h.
 
 #include "DSP.hpp"
-#include <complex>
-#include <iostream>
-using namespace std;
-
 
 const double pi = 2 * acos(0.0);
-const complex<double> j(0,1);
+const std::complex<double> j(0,1);
 
 DSP::DSP() {}
 
-DSP::DSP(vector<double> x, vector<double> h): x(x), h(h) {}
+DSP::DSP(std::vector<double> x, std::vector<double> h): x(x), h(h) {}
 
 DSP::DSP(const DSP& other) {
     *this = other;
@@ -29,8 +25,8 @@ DSP& DSP::operator=(const DSP& other) {
 // Place 2 system impulse functions in parallel with each other
 DSP& DSP::operator||(const DSP& other) {
     static DSP DSPResult;
-    vector<double> largest = this->h;
-    vector<double> smallest = other.h;
+    std::vector<double> largest = this->h;
+    std::vector<double> smallest = other.h;
 
     if (other.h.size() > this->h.size()) {
         largest = other.h;
@@ -48,8 +44,8 @@ DSP& DSP::operator||(const DSP& other) {
 }
 
 // Returns the DFT of the input vector. Output is a vector input.size() long.
-vector<complex<double>> DSP::DFT(vector<double> input) {
-    vector<complex<double>> result;
+std::vector<std::complex<double>> DSP::DFT(std::vector<double> input) {
+    std::vector<std::complex<double>> result;
     const int inputSize = input.size();
     for (int i = 0; i < inputSize; i++) {
         result.push_back(DFTElement(input, angularFrequency(inputSize), i));
@@ -58,19 +54,19 @@ vector<complex<double>> DSP::DFT(vector<double> input) {
 }
 
 // Calculate each DFT value one by one.Helper function for the DFT function.
-complex<double> DSP::DFTElement(vector<double> input, vector<double> angularFrequency, int k) {
-    complex<double> result(0, 0);
+std::complex<double> DSP::DFTElement(std::vector<double> input, std::vector<double> angularFrequency, int k) {
+    std::complex<double> result(0, 0);
     int inputLength = input.size();
     for (int i = 0; i < inputLength; i++) {
-        result += polar(1.0 * abs(input[i]), (-1.0 * angularFrequency[i] * k) + arg(input[i]));
+        result += std::polar(1.0 * abs(input[i]), (-1.0 * angularFrequency[i] * k) + std::arg(input[i]));
     }
     return result;
 }
 
 // Helper function for the DFT function.
-vector<double> DSP::angularFrequency(int inputSize) {
+std::vector<double> DSP::angularFrequency(int inputSize) {
     const double x = 2 * pi / inputSize;
-    vector<double> result;
+    std::vector<double> result;
     for (int i = 0; i < inputSize; i++) {
         result.push_back(x * i);
     }

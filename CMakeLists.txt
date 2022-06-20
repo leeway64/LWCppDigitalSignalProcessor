@@ -1,15 +1,13 @@
 cmake_minimum_required (VERSION 3.8)
 
 project (
-	"Digital-Signal-Processor"
+	"LWCppDigitalSignalProcessor"
 	LANGUAGES CXX
 	VERSION "1.0.0"
 	)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX20_STANDARD_COMPILE_OPTION "-std:c++latest")
-set(CMAKE_CXX20_EXTENSION_COMPILE_OPTION "-std:c++latest")
-
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
@@ -39,11 +37,14 @@ conan_cmake_install(PATH_OR_REFERENCE .
 find_package(Catch2)
 
 
-add_executable (Digital-Signal-Processor
-	"src/DSP.hpp" "src/DSP.cpp" "tests/catch2_main.cpp" "tests/test_suite.cpp")
+add_executable (LWCppDigitalSignalProcessor_tests
+				"src/DSP.hpp"
+				"src/DSP.cpp"
+				"tests/catch2_main.cpp"
+				"tests/test_suite.cpp")
 
 target_link_libraries(
-	Digital-Signal-Processor
+	LWCppDigitalSignalProcessor_tests
 	PRIVATE
 		Catch2::Catch2
 )

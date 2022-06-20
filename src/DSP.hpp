@@ -7,12 +7,11 @@
 
 #include <complex>
 #include <vector>
-using namespace std;
 
 class DSP{
     public:
-        vector<double> x;  // System input signal
-        vector<double> h;  // System impulse function
+        std::vector<double> x;  // System input signal
+        std::vector<double> h;  // System impulse function
         
         // Default constructor. Leaves x and h as empty vectors.
         DSP();
@@ -22,7 +21,7 @@ class DSP{
         @param x is the system input signal that member variable x should be set to
         @param h is the system impulse function that member variable h should be set to
         */
-        DSP(vector<double> x, vector<double> h);
+        DSP(std::vector<double> x, std::vector<double> h);
 
         /**
         Copy constructor. Initializes a previously uninitialized DSP object with a previously
@@ -77,7 +76,7 @@ class DSP{
         @return A standard vector of the DFT of the input vector. The DFT of input will have the same
         length as input.
         */
-        static vector<complex<double>> DFT(vector<double> input);
+        static std::vector<std::complex<double>> DFT(std::vector<double> input);
     private:
         /**
         Calculate each DFT value one by one. Helper function for the DFT function.
@@ -87,7 +86,7 @@ class DSP{
         @param k is the index of the DFT element to calculate.
         @return
         */
-        static inline complex<double> DFTElement(vector<double> input, vector<double> angularFrequency, int k);
+        static inline std::complex<double> DFTElement(std::vector<double> input, std::vector<double> angularFrequency, int k);
 
         /**
         Calculates each angular frequency divided by the index of the DFT element. Helper function
@@ -95,6 +94,6 @@ class DSP{
         @param inputSize is the size of the input vector to find the DFT of.
         @return A vector inputSize long. Each element in the output is 2pi*index/inputSize.
         */
-        static inline vector<double> angularFrequency(int inputSize);
+        static inline std::vector<double> angularFrequency(int inputSize);
 };
 #endif // DSP_H

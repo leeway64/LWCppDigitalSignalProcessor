@@ -2,4 +2,4 @@
 .idea/
 
 # CLion's default CMake build folder
-cmake-build-debug/
+cmake-build*/
