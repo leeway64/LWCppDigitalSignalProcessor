@@ -38,8 +38,8 @@ find_package(Catch2)
 
 
 add_executable (LWCppDigitalSignalProcessor_tests
-				"src/DSP.hpp"
-				"src/DSP.cpp"
+				"src/LWDSP.hpp"
+				"src/LWDSP.cpp"
 				"tests/catch2_main.cpp"
 				"tests/test_suite.cpp")
 

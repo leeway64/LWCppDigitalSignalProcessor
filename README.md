@@ -1,15 +1,21 @@
-# Digital-Signal-Processor
+# LWCppDigitalSignalProcessor
 
-This repository contains a simple class that can perform digital signal processing algorithms.
-Right now, the class can only perform the discrete Fourier transform (DFT).
+LWCppDigitalSignalProcessor contains a simple class (LWDSP) that can perform digital signal
+processing algorithms. Right now, the class can only perform the discrete Fourier transform (DFT).
+
+
+## Installation
+To install LWDSP, simply copy and paste [`LWDSP.cpp`](src/LWDSP.cpp) and
+[`LWDSP.cpp`](src/LWDSP.cpp) into your project. Then, include LWDSP by using
+`#include <path/to/LWDSP.hpp>`.
 
 
 ## Running tests
 ```shell
 git clone https://github.com/leeway64/LWCppDigitalSignalProcessor.git
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=ninja -G Ninja -S . -B ./cmake-build
-cmake --build ./cmake-build --target LWIMDbTop250Analyzer
-bin/LWCppDigitalSignalProcessor_tests
+cmake --build ./cmake-build --target LWCppDigitalSignalProcessor_tests
+cmake-build/LWCppDigitalSignalProcessor_tests
 ```
 
 

@@ -8,67 +8,67 @@
 #include <complex>
 #include <vector>
 
-class DSP{
+class LWDSP{
     public:
         std::vector<double> x;  // System input signal
         std::vector<double> h;  // System impulse function
         
         // Default constructor. Leaves x and h as empty vectors.
-        DSP();
+        LWDSP();
 
         /**
         Constructor that sets x and h equal to the input vectors, x and h
         @param x is the system input signal that member variable x should be set to
         @param h is the system impulse function that member variable h should be set to
         */
-        DSP(std::vector<double> x, std::vector<double> h);
+        LWDSP(std::vector<double> x, std::vector<double> h);
 
         /**
-        Copy constructor. Initializes a previously uninitialized DSP object with a previously
-        initialized DSP object.
-        @param other is the other DSP object to initialize this DSP object to. Sets this object's x and h
+        Copy constructor. Initializes a previously uninitialized LWDSP object with a previously
+        initialized LWDSP object.
+        @param other is the other LWDSP object to initialize this LWDSP object to. Sets this object's x and h
         equal to the other object's x and h.
         */
-        DSP(const DSP& other);
+        LWDSP(const LWDSP& other);
 
         /**
-        Assignment operator. Replaces the member variables of an already initialized DSP object
-        with the member variables of another initialized DSP object.
-        @param other is the other DSP object to set this DSP object to. Replaces the input signal
-        and impulse function of a previously initialized DSP object with the input signal and
-        impulse function of another previously initialized DSP object.
-        @return A reference to a DSP object.
+        Assignment operator. Replaces the member variables of an already initialized LWDSP object
+        with the member variables of another initialized LWDSP object.
+        @param other is the other LWDSP object to set this LWDSP object to. Replaces the input signal
+        and impulse function of a previously initialized LWDSP object with the input signal and
+        impulse function of another previously initialized LWDSP object.
+        @return A reference to a LWDSP object.
         */
-        DSP& operator=(const DSP& other);
+        LWDSP& operator=(const LWDSP& other);
 
         /**
         Overload for equal to operator.
-        @param left is the first DSP object to be compared.
-        @param right is the second DSP object to be compared.
+        @param left is the first LWDSP object to be compared.
+        @param right is the second LWDSP object to be compared.
         @return true if the xs and hs for left and right are equal.
         */
-        friend bool operator==(const DSP& left, const DSP& right) {
+        friend bool operator==(const LWDSP& left, const LWDSP& right) {
             return (left.x == right.x) && (left.h == right.h);
         }
 
         /**
         Overload for not equal to operator.
-        @param left is the first DSP object to be compared.
-        @param right is the second DSP object to be compared.
+        @param left is the first LWDSP object to be compared.
+        @param right is the second LWDSP object to be compared.
         @return true if either x or h are different from each other, false if not.
         */
-        friend bool operator!=(const DSP& left, const DSP& right) {
+        friend bool operator!=(const LWDSP& left, const LWDSP& right) {
             return (left.x != right.x) || (left.h != right.h);
         }
 
         /*
         Connects 2 system impulse functions in parallel
-        @param other is the DSP that provides the other impulse function that the impulse function
-        of this DSP will be in parallel with
-        @return A new DSP, with an h of the sum of the impulse functions of this and other.
-        The x of the new DSP is the x of this DSP.
+        @param other is the LWDSP that provides the other impulse function that the impulse function
+        of this LWDSP will be in parallel with
+        @return A new LWDSP, with an h of the sum of the impulse functions of this and other.
+        The x of the new LWDSP is the x of this LWDSP.
         */
-        DSP& operator||(const DSP& other);
+        LWDSP& operator||(const LWDSP& other);
 
         /**
         Returns the DFT of the input vector.
