@@ -61,7 +61,7 @@ class LWDSP{
             return (left.x != right.x) || (left.h != right.h);
         }
 
-        /*
+        /**
         Connects 2 system impulse functions in parallel
         @param other is the LWDSP that provides the other impulse function that the impulse function
         of this LWDSP will be in parallel with
