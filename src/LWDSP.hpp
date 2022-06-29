@@ -79,7 +79,8 @@ class LWDSP{
         static std::vector<std::complex<double>> DFT(std::vector<double> input);
     private:
         /**
-        Calculate each DFT value one by one. Helper function for the DFT function.
+        Calculate each DFT value one by one. Helper function for the DFT function. Inline indicates
+        to the compiler to substitute every instance of a function call with the function body.
         @param input is the vector to find the DFT of.
         @param angularFrequency is a vector of angular frequencies. Calculated from the angularFrequency
         function.

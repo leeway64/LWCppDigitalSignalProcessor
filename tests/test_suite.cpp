@@ -5,7 +5,7 @@
 
 #include "../src/LWDSP.hpp"
 
-using namespace std::complex_literals;
+using namespace std::complex_literals;  // Need to use this namespace to use the imaginary unit i
 
 std::vector<double> vectorWithSingleValue(int size, int value) {
     std::vector<double> result;
@@ -152,14 +152,15 @@ TEST_CASE("Further DFT testing", "[DFT]") {
         DSP.x = {0.5, 2.5, 5.0, 100.0, 120.9};
         DSP.h = {1.2, 45.8, 222.2, 90.1};
 
-        //std::vector<std::complex<double>> result1 = {10, -2. + 2i, -2, -2. - 2i};
-        //std::vector<std::complex<double>> result2 = {100, -20. + 20i, -20, -20. - 20i};
+        std::vector<std::complex<double>> result1 = {228.9, -46.3140873035010 + 168.4446904971312i,
+                                                     -66.8859126964990 - 20.7565951766108i, -66.8859126964990 + 20.7565951766108i};
+        std::vector<std::complex<double>> result2 = {359.3, -221. + 443i, 875, -221. - 443i};
 
         for (int i = 0; i < result1.size(); ++i)
         {
 //            REQUIRE(Approx(real(LWDSP::DFT(DSP.x)[i])).margin(1e-12) == real(result1[i]));
 //            REQUIRE(Approx(real(LWDSP::DFT(DSP.h)[i])).margin(1e-12) == real(result2[i]));
-//
+
 //            REQUIRE(Approx(imag(LWDSP::DFT(DSP.x)[i])).margin(1e-12) == imag(result1[i]));
 //            REQUIRE(Approx(imag(LWDSP::DFT(DSP.h)[i])).margin(1e-12) == imag(result2[i]));
         }

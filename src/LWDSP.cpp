@@ -53,7 +53,7 @@ std::vector<std::complex<double>> LWDSP::DFT(std::vector<double> input) {
     return result;
 }
 
-// Calculate each DFT value one by one.Helper function for the DFT function.
+// Calculate each DFT value one by one. Helper function for the DFT function.
 std::complex<double> LWDSP::DFTElement(std::vector<double> input, std::vector<double> angularFrequency, int k) {
     std::complex<double> result(0, 0);
     int inputLength = input.size();
