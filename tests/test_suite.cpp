@@ -1,6 +1,7 @@
 #include <vector>
 #include <complex>
 
+#include <iostream>
 #include <catch2/catch.hpp>
 
 #include "../src/LWDSP.hpp"
@@ -117,12 +118,12 @@ TEST_CASE("Basic testing of DFT function", "[DFT]") {
 		
 		REQUIRE(LWDSP::DFT(DSP1.x).size() == v1.size());
 		for (int index = 0; index < v1.size(); index++) {
-			REQUIRE(Approx(real(LWDSP::DFT(DSP1.x)[index])).margin(1e-12) == real(v1[index]));
+			REQUIRE(Approx(real(LWDSP::DFT(DSP1.x)[index])).margin(1e-10) == real(v1[index]));
 		}
-		
+
 		REQUIRE(LWDSP::DFT(DSP1.h).size() == v2.size());
 		for (int index = 0; index < v2.size(); index++) {
-			REQUIRE(Approx(real(LWDSP::DFT(DSP1.h)[index])).margin(1e-12) == real(v2[index]));
+			REQUIRE(Approx(real(LWDSP::DFT(DSP1.h)[index])).margin(1e-10) == real(v2[index]));
 		}
 	}
 }

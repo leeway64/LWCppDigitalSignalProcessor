@@ -6,8 +6,6 @@ project (
 	VERSION "1.0.0"
 	)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX20_STANDARD_COMPILE_OPTION "-std:c++latest")
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
@@ -39,7 +37,6 @@ find_package(Catch2)
 
 add_executable (LWCppDigitalSignalProcessor_tests
 				"src/LWDSP.hpp"
-				"src/LWDSP.cpp"
 				"tests/catch2_main.cpp"
 				"tests/test_suite.cpp")
 
