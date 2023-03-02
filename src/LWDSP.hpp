@@ -1,7 +1,3 @@
-// This class allows the user to define an input to a system and a system
-// impulse function (x and h, respectively). This class also allows the user to
-// perform the discrete Fourier transform (DFT) on x and h.
-
 #ifndef DSP_H
 #define DSP_H
 
@@ -12,6 +8,9 @@
 const std::complex<double> j(0,1);
 
 
+// LWDSP allows the user to define an input to a system and a system
+// impulse function (x and h, respectively). This class also allows the user to
+// perform the discrete Fourier transform (DFT) on x and h.
 class LWDSP{
     public:
         std::vector<double> x;  // System input signal
@@ -81,25 +80,6 @@ class LWDSP{
         length as input.
         */
         static std::vector<std::complex<double>> DFT(std::vector<double> input);
-    private:
-        /**
-        Calculate each DFT value one by one. Helper function for the DFT function. Inline indicates
-        to the compiler to substitute every instance of a function call with the function body.
-        @param input is the vector to find the DFT of.
-        @param angularFrequency is a vector of angular frequencies. Calculated from the angularFrequency
-        function.
-        @param k is the index of the DFT element to calculate.
-        @return
-        */
-        static inline std::complex<double> DFTElement(std::vector<double> input, std::vector<double> angularFrequency, int k);
-
-        /**
-        Calculates each angular frequency divided by the index of the DFT element. Helper function
-        for the DFT function.
-        @param inputSize is the size of the input vector to find the DFT of.
-        @return A vector inputSize long. Each element in the output is 2pi*index/inputSize.
-        */
-        static inline std::vector<double> angularFrequency(int inputSize);
 };
 
 
