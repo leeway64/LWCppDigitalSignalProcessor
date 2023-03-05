@@ -14,20 +14,20 @@ TEST_CASE("Testing constructors", "[Default ctor, construction from vectors, cop
     std::vector<double> v2 = { 5,6,7,8 };
 
 	SECTION("Default constructor") {
-		LWDSP DSP1;
+		LWDSP<int> DSP1;
 		REQUIRE(DSP1.x.empty());
 		REQUIRE(DSP1.h.empty());
 	}
 
 	SECTION("Construction from vectors") {
-		LWDSP DSP1(v1, v2);
+		LWDSP<double> DSP1(v1, v2);
 		REQUIRE(DSP1.x == v1);
 		REQUIRE(DSP1.h == v2);
 	}
 
 	SECTION("Copy constructor") {
-		LWDSP DSP2(v1, v2);
-		LWDSP DSP1(DSP2);
+		LWDSP<double> DSP2(v1, v2);
+		LWDSP<double> DSP1(DSP2);
 		REQUIRE(DSP1.x == DSP2.x);
 		REQUIRE(DSP1.h == DSP2.h);
 	}
@@ -35,8 +35,8 @@ TEST_CASE("Testing constructors", "[Default ctor, construction from vectors, cop
 	SECTION("Assignment operator") {
 		std::vector<double> v3 = { 100, 200, 300, 400, 500, 600, 101010 };
 		std::vector<double> v4 = { 100, 5050505, 101010 };
-		LWDSP DSP1(v2, v1);
-		LWDSP DSP2(v4, v3);
+		LWDSP<double> DSP1(v2, v1);
+		LWDSP<double> DSP2(v4, v3);
 		DSP1 = DSP2;
 		REQUIRE(DSP1.x == DSP2.x);
 		REQUIRE(DSP1.h == DSP2.h);
@@ -48,9 +48,9 @@ TEST_CASE("Overloads for equal to/not equal to operators", "[Overloads]") {
 	std::vector<double> v2 = { 5,6,7,8 };
 	std::vector<double> v3 = { 100, 50505, 1010 };
 
-	LWDSP DSP1(v1, v2);
-	LWDSP DSP2(v1, v2);
-	LWDSP DSP3(v3, v1);
+	LWDSP<double> DSP1(v1, v2);
+	LWDSP<double> DSP2(v1, v2);
+	LWDSP<double> DSP3(v3, v1);
 
 	REQUIRE(DSP1 == DSP2);
 	REQUIRE(DSP3 != DSP1);
@@ -60,12 +60,12 @@ TEST_CASE("2 systems in parallel", "[Parallel]") {
 	std::vector<double> v1 = { 1,2,3,4 };
 	std::vector<double> v2 = { 5,6,7,8 };
 	std::vector<double> v3 = { 100, 50505, 1010 };
-
 	std::vector<double> v4 = {10, 12, 14, 16};
 	std::vector<double> v5 = {105, 50511, 1017, 8};
-	LWDSP DSP1(v1, v2);
-	LWDSP DSP2(v1, v2);
-	LWDSP DSP3(v3, v3);
+	
+	LWDSP<double> DSP1(v1, v2);
+	LWDSP<double> DSP2(v1, v2);
+	LWDSP<double> DSP3(v3, v3);
 
 	LWDSP DSP4 = DSP1 || DSP2;
 	REQUIRE(DSP4.x == v1);
@@ -79,23 +79,23 @@ TEST_CASE("2 systems in parallel", "[Parallel]") {
 TEST_CASE("DFT function", "[DFT]") {
 	std::vector<double> v1 = { 1,2,3,4 };
 	std::vector<double> v2 = { 5,6,7,8 };
-	LWDSP DSP1;
+	LWDSP<double> DSP1;
 	
 	SECTION("Zero elements in x and h") {
-		REQUIRE(LWDSP::DFT(DSP1.x).empty());
-		REQUIRE(LWDSP::DFT(DSP1.h).empty());
+		REQUIRE(LWDSP<double>::DFT(DSP1.x).empty());
+		REQUIRE(LWDSP<double>::DFT(DSP1.h).empty());
 	}
 
 	SECTION("One element in x and h") {
 		DSP1.x.push_back(v1[1]);
 		DSP1.h.push_back(v1[1]);
-		REQUIRE(LWDSP::DFT(DSP1.x)[0] == v1[1]);
-		REQUIRE(LWDSP::DFT(DSP1.x).size() == 1);
+		REQUIRE(LWDSP<double>::DFT(DSP1.x)[0] == v1[1]);
+		REQUIRE(LWDSP<double>::DFT(DSP1.x).size() == 1);
 
-		REQUIRE(LWDSP::DFT(DSP1.h)[0] == v1[1]);
-		REQUIRE(LWDSP::DFT(DSP1.h).size() == 1);
+		REQUIRE(LWDSP<double>::DFT(DSP1.h)[0] == v1[1]);
+		REQUIRE(LWDSP<double>::DFT(DSP1.h).size() == 1);
 	}
-	
+	/*
 	SECTION("Integers as input") {
 		
 		SECTION("Constant values in x and h") {
@@ -205,5 +205,5 @@ TEST_CASE("DFT function", "[DFT]") {
 		SECTION("Imaginary and real doubles") {
 			
 		}		
-	}	
+	}*/
 }

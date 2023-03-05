@@ -11,10 +11,11 @@ const std::complex<double> j(0,1);
 // LWDSP allows the user to define an input to a system and a system
 // impulse function (x and h, respectively). This class also allows the user to
 // perform the discrete Fourier transform (DFT) on x and h.
-class LWDSP{
+template <class T>
+class LWDSP {
     public:
-        std::vector<double> x;  // System input signal
-        std::vector<double> h;  // System impulse function
+        std::vector<T> x;  // System input signal
+        std::vector<T> h;  // System impulse function
         
         // Default constructor. Leaves x and h as empty vectors.
         LWDSP();
@@ -24,7 +25,7 @@ class LWDSP{
         @param x is the system input signal that member variable x should be set to
         @param h is the system impulse function that member variable h should be set to
         */
-        LWDSP(std::vector<double> x, std::vector<double> h);
+        LWDSP(std::vector<T> x, std::vector<T> h);
 
         /**
         Copy constructor. Initializes a previously uninitialized LWDSP object with a previously
@@ -32,7 +33,7 @@ class LWDSP{
         @param other is the other LWDSP object to initialize this LWDSP object to. Sets this object's x and h
         equal to the other object's x and h.
         */
-        LWDSP(const LWDSP& other);
+        LWDSP(const LWDSP<T>& other);
 
         /**
         Assignment operator. Replaces the member variables of an already initialized LWDSP object
@@ -42,7 +43,7 @@ class LWDSP{
         impulse function of another previously initialized LWDSP object.
         @return A reference to a LWDSP object.
         */
-        LWDSP& operator=(const LWDSP& other);
+        LWDSP<T>& operator=(const LWDSP<T>& other);
 
         /**
         Overload for equal to operator.
@@ -50,7 +51,7 @@ class LWDSP{
         @param right is the second LWDSP object to be compared.
         @return true if the xs and hs for left and right are equal.
         */
-        friend bool operator==(const LWDSP& left, const LWDSP& right) {
+        friend bool operator==(const LWDSP<T>& left, const LWDSP<T>& right) {
             return (left.x == right.x) && (left.h == right.h);
         }
 
@@ -60,7 +61,7 @@ class LWDSP{
         @param right is the second LWDSP object to be compared.
         @return true if either x or h are different from each other, false if not.
         */
-        friend bool operator!=(const LWDSP& left, const LWDSP& right) {
+        friend bool operator!=(const LWDSP<T>& left, const LWDSP<T>& right) {
             return (left.x != right.x) || (left.h != right.h);
         }
 
@@ -71,7 +72,7 @@ class LWDSP{
         @return A new LWDSP, with an h of the sum of the impulse functions of this and other.
         The x of the new LWDSP is the x of this LWDSP.
         */
-        LWDSP& operator||(const LWDSP& other);
+        LWDSP<T>& operator||(const LWDSP<T>& other);
 
         /**
         Returns the DFT of the input vector.
@@ -79,27 +80,32 @@ class LWDSP{
         @return A standard vector of the DFT of the input vector. The DFT of input will have the same
         length as input.
         */
-        static std::vector<std::complex<double>> DFT(std::vector<double> input);
+        static std::vector<std::complex<double>> DFT(std::vector<T> input);
 };
 
 
-LWDSP::LWDSP() {}
+template <class T>
+LWDSP<T>::LWDSP(){}
 
-LWDSP::LWDSP(std::vector<double> x, std::vector<double> h): x(x), h(h) {}
+template <class T>
+LWDSP<T>::LWDSP(std::vector<T> x, std::vector<T> h): x(x), h(h) {}
 
-LWDSP::LWDSP(const LWDSP& other) {
+template <class T>
+LWDSP<T>::LWDSP(const LWDSP<T>& other) {
     *this = other;
 }
 
 // Assignment operator
-LWDSP& LWDSP::operator=(const LWDSP& other) {
+template <class T>
+LWDSP<T>& LWDSP<T>::operator=(const LWDSP<T>& other) {
     this->x = other.x;
     this->h = other.h;
     return *this;
 }
 
 // Place 2 system impulse functions in parallel with each other
-LWDSP& LWDSP::operator||(const LWDSP& other) {
+template <class T>
+LWDSP<T>& LWDSP<T>::operator||(const LWDSP<T>& other) {
     static LWDSP DSPResult;
     std::vector<double> largest = this->h;
     std::vector<double> smallest = other.h;
@@ -122,7 +128,8 @@ LWDSP& LWDSP::operator||(const LWDSP& other) {
 }
 
 // Returns the DFT of the input vector. Output is a vector input.size() long.
-std::vector<std::complex<double>> LWDSP::DFT(std::vector<double> input) {
+template <class T>
+std::vector<std::complex<double>> LWDSP<T>::DFT(std::vector<T> input) {
     std::vector<std::complex<double>> result;
     const int N = input.size();
     for (int k = 0; k < N; k++)
