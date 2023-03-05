@@ -131,6 +131,7 @@ LWDSP<T>& LWDSP<T>::operator||(const LWDSP<T>& other) {
 template <class T>
 std::vector<std::complex<double>> LWDSP<T>::DFT(std::vector<T> input) {
     std::vector<std::complex<double>> result;
+    
     const int N = input.size();
     for (int k = 0; k < N; k++)
     {
@@ -138,7 +139,7 @@ std::vector<std::complex<double>> LWDSP<T>::DFT(std::vector<T> input) {
         for (int n = 0; n < N; ++n)
         {
             const double knN = 1.0 * k * n / N;
-            element += exp(-1.0 * j * 2.0 * std::numbers::pi * knN) * input[n];
+            element += exp(-1.0 * j * 2.0 * std::numbers::pi * knN) * static_cast<double>(input[n]);
         }
         result.push_back(element);
     }
