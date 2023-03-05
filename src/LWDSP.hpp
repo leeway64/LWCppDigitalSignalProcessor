@@ -139,7 +139,7 @@ std::vector<std::complex<double>> LWDSP<T>::DFT(std::vector<T> input) {
         for (int n = 0; n < N; ++n)
         {
             const double knN = 1.0 * k * n / N;
-            element += exp(-1.0 * j * 2.0 * std::numbers::pi * knN) * static_cast<double>(input[n]);
+            element += exp(-1.0 * j * 2.0 * std::numbers::pi * knN) * static_cast<std::complex<double>>(input[n]);
         }
         result.push_back(element);
     }

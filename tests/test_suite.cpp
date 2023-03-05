@@ -149,14 +149,14 @@ TEST_CASE("DFT function", "[DFT]") {
 			for (int i = 0; i < result1.size(); ++i)
 			{
 				REQUIRE(Approx(std::real(x_DFT[i])).margin(1e-12) == std::real(result1[i]));
-				REQUIRE(Approx(real(h_DFT[i])).margin(1e-12) == std::real(result2[i]));
+				REQUIRE(Approx(std::real(h_DFT[i])).margin(1e-12) == std::real(result2[i]));
 
 				REQUIRE(Approx(std::imag(x_DFT[i])).margin(1e-12) == std::imag(result1[i]));
 				REQUIRE(Approx(std::imag(h_DFT[i])).margin(1e-12) == std::imag(result2[i]));
 			}
 		}
 	}
-	/*
+	
 	SECTION("Doubles as input") {
 		SECTION("Basic doubles scenario")
 		{
@@ -169,38 +169,45 @@ TEST_CASE("DFT function", "[DFT]") {
 														 -046.3140873035010 - 168.4446904971312i};
 			std::vector<std::complex<double>> result2 = {359.3, -221. + 44.3i, 87.5, -221. - 44.3i};
 
-			for (int i = 0; i < result1.size(); ++i)
-			{
-				REQUIRE(Approx(real(LWDSP<double>::DFT(DSP.x)[i])).margin(1e-12) == real(result1[i]));
-	            REQUIRE(Approx(real(LWDSP<double>::DFT(DSP.h)[i])).margin(1e-12) == real(result2[i]));
+			const auto x_DFT = LWDSP<double>::DFT(DSP.x);
+			const auto h_DFT = LWDSP<double>::DFT(DSP.h);
 
-	            REQUIRE(Approx(imag(LWDSP<double>::DFT(DSP.x)[i])).margin(1e-12) == imag(result1[i]));
-	            REQUIRE(Approx(imag(LWDSP<double>::DFT(DSP.h)[i])).margin(1e-12) == imag(result2[i]));
+			for (int i = 0; i < result1.size(); ++i)
+			{	            
+				REQUIRE(Approx(std::real(x_DFT[i])).margin(1e-12) == std::real(result1[i]));
+				REQUIRE(Approx(std::real(h_DFT[i])).margin(1e-12) == std::real(result2[i]));
+
+				REQUIRE(Approx(std::imag(x_DFT[i])).margin(1e-12) == std::imag(result1[i]));
+				REQUIRE(Approx(std::imag(h_DFT[i])).margin(1e-12) == std::imag(result2[i]));
+	            
 			}
 		}
-    }*/
-	/*
+    }
+	
 	SECTION("Complex doubles as input") {
 		SECTION("Complex integers")
 		{
 			SECTION("Imaginary numbers only") {
-				LWDSP DSP;
-				//DSP.x = { -64i, 128i };
-				//DSP.h = { 1i, 2i, 3i, 4i, 5i, 6i };
+				LWDSP<std::complex<int>> DSP;
+				DSP.x = { -64i, 128i };
+				DSP.h = { 1i, 2i, 3i, 4i, 5i, 6i };
 
 				std::vector<std::complex<double>> result1 = { 64i, -192i };
 				std::vector<std::complex<double>> result2 = { 15i, -3.440954801177933 - 2.5i, -0.812299240582266 - 2.5i, 0.812299240582266 - 2.5i, 3.440954801177933 - 2.5i };
 
+			    const auto x_DFT = LWDSP<std::complex<int>>::DFT(DSP.x);
+			    //const auto h_DFT = LWDSP<double>::DFT(DSP.h);
+
 				for (int i = 0; i < result1.size(); ++i)
 				{
-					//REQUIRE(Approx(real(LWDSP::DFT(DSP.x)[i])).margin(1e-12) == real(result1[i]));
-					//REQUIRE(Approx(real(LWDSP::DFT(DSP.h)[i])).margin(1e-12) == real(result2[i]));
+				    //REQUIRE(Approx(std::real(x_DFT[i])).margin(1e-12) == std::real(result1[i]));
+				    //REQUIRE(Approx(std::real(h_DFT[i])).margin(1e-12) == std::real(result2[i]));
 
-					//REQUIRE(Approx(imag(LWDSP::DFT(DSP.x)[i])).margin(1e-12) == imag(result1[i]));
-					//REQUIRE(Approx(imag(LWDSP::DFT(DSP.h)[i])).margin(1e-12) == imag(result2[i]));
+				    //REQUIRE(Approx(std::imag(x_DFT[i])).margin(1e-12) == std::imag(result1[i]));
+				    //REQUIRE(Approx(std::imag(h_DFT[i])).margin(1e-12) == std::imag(result2[i]));
 				}				
 			}
-			
+			/*
 			SECTION("Imaginary and real numbers") {
 				LWDSP DSP;
 				//DSP.x = { 1., 2.-1i, -1i, -1.+2i };
@@ -217,10 +224,10 @@ TEST_CASE("DFT function", "[DFT]") {
 					//REQUIRE(Approx(imag(LWDSP::DFT(DSP.x)[i])).margin(1e-12) == imag(result1[i]));
 					//REQUIRE(Approx(imag(LWDSP::DFT(DSP.h)[i])).margin(1e-12) == imag(result2[i]));
 				}
-			}			
-		}
+			}*/
+		}/*
 		SECTION("Imaginary and real doubles") {
 			
-		}		
-	}*/
+		}*/
+	}
 }
