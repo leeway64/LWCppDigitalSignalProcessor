@@ -128,6 +128,7 @@ LWDSP<T>& LWDSP<T>::operator||(const LWDSP<T>& other) {
 }
 
 // Returns the DFT of the input vector. Output is a vector input.size() long.
+// Refer to this Wikipedia page for more information about this DFT algorithm: https://en.wikipedia.org/wiki/Discrete_Fourier_transform
 template <class T>
 std::vector<std::complex<double>> LWDSP<T>::DFT(std::vector<T> input) {
     std::vector<std::complex<double>> result;

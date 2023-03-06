@@ -6,7 +6,8 @@
 
 
 LWCppDigitalSignalProcessor contains a class (`LWDSP`) that can perform digital signal
-processing algorithms. Right now, the class can only perform the discrete Fourier transform (DFT).
+processing algorithms. Right now, the class can only perform the
+[discrete Fourier transform (DFT)](https://en.wikipedia.org/wiki/Discrete_Fourier_transform).
 
 
 ## Installation
@@ -19,7 +20,7 @@ git clone https://github.com/leeway64/LWCppDigitalSignalProcessor.git
 Or you can simply include [`LWDSP.hpp`](src/LWDSP.hpp).
 
 
-## Running tests
+## Running Unit Tests
 ```bash
 git clone https://github.com/leeway64/LWCppDigitalSignalProcessor.git
 cd LWCppDigitalSignalProcessor

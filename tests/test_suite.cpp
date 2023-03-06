@@ -148,6 +148,7 @@ TEST_CASE("DFT function", "[DFT]") {
 
 			REQUIRE(x_DFT.size() == result1.size());
 			REQUIRE(h_DFT.size() == result2.size());
+			
 			for (int i = 0; i < result1.size(); ++i)
 			{
 				REQUIRE(Approx(std::real(x_DFT[i])).margin(1e-12) == std::real(result1[i]));
@@ -178,7 +179,6 @@ TEST_CASE("DFT function", "[DFT]") {
 			for (int i = 0; i < result1.size(); ++i)
 			{	            
 				REQUIRE(Approx(std::real(x_DFT[i])).margin(1e-12) == std::real(result1[i]));
-
 				REQUIRE(Approx(std::imag(x_DFT[i])).margin(1e-12) == std::imag(result1[i]));
 			}
 			
@@ -186,7 +186,6 @@ TEST_CASE("DFT function", "[DFT]") {
 			for (int i = 0; i < result2.size(); ++i)
 			{	            
 				REQUIRE(Approx(std::real(h_DFT[i])).margin(1e-12) == std::real(result2[i]));
-
 				REQUIRE(Approx(std::imag(h_DFT[i])).margin(1e-12) == std::imag(result2[i]));
 			}
 		}
@@ -219,7 +218,6 @@ TEST_CASE("DFT function", "[DFT]") {
 				    REQUIRE(Approx(std::real(h_DFT[i])).margin(1e-12) == std::real(result2[i]));
 				    REQUIRE(Approx(std::imag(h_DFT[i])).margin(1e-12) == std::imag(result2[i]));
 				}
-				
 			}
 			
 			SECTION("Imaginary and real numbers") {
@@ -236,6 +234,7 @@ TEST_CASE("DFT function", "[DFT]") {
 			    REQUIRE(x_DFT.size() == result1.size());
 				REQUIRE(h_DFT.size() == result2.size());
 				REQUIRE(x_DFT.size() == h_DFT.size());
+				
 				for (int i = 0; i < result1.size(); ++i)
 				{
 					REQUIRE(Approx(std::real(x_DFT[i])).margin(1e-12) == std::real(result1[i]));
@@ -245,9 +244,32 @@ TEST_CASE("DFT function", "[DFT]") {
 					REQUIRE(Approx(std::imag(h_DFT[i])).margin(1e-12) == std::imag(result2[i]));
 				}
 			}
-		}/*
+		}
+		
 		SECTION("Imaginary and real doubles") {
+			LWDSP<std::complex<double>> DSP;
+			DSP.x = { 3.5-1.5i, 0.64-2i, 12.8+3i };
+			DSP.h = { 90.9, 12.34+8.88i, 6.5+67.3i, 9.736-8.888i, 4.+5.i };
+
+			std::vector<std::complex<double>> result1 = { 16.94-0.5i, -7.550127018922193+8.530868910018773i, 1.110127018922192 -12.530868910018773i };
+			std::vector<std::complex<double>> result2 = { 123.476+72.292i, 131.2864198522991-48.9968830629883i, 12.5193751479846-1.1586030973452i, 152.8763493171854+14.8008926843555i, 34.3418556825308-36.9374065240220i };
+
+		    const auto x_DFT = LWDSP<std::complex<double>>::DFT(DSP.x);
+		    const auto h_DFT = LWDSP<std::complex<double>>::DFT(DSP.h);
+
+		    REQUIRE(x_DFT.size() == result1.size());
+			for (int i = 0; i < result1.size(); ++i)
+			{
+			    REQUIRE(Approx(std::real(x_DFT[i])).margin(1e-12) == std::real(result1[i]));
+			    REQUIRE(Approx(std::imag(x_DFT[i])).margin(1e-12) == std::imag(result1[i]));
+			}
 			
-		}*/
+			REQUIRE(h_DFT.size() == result2.size());
+			for (int i = 0; i < result2.size(); ++i)
+			{
+			    REQUIRE(Approx(std::real(h_DFT[i])).margin(1e-12) == std::real(result2[i]));
+			    REQUIRE(Approx(std::imag(h_DFT[i])).margin(1e-12) == std::imag(result2[i]));
+			}
+		}
 	}
 }
